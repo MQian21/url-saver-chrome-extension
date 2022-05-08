@@ -9,6 +9,9 @@ inputBtn.addEventListener("click", function() {
     console.log(myLinks)
 })
 
+let listItems = " "
 for (let i =0; i < myLinks.length; i++) {
-    ulEl.innerHTML += "<li>" + myLinks[i] + "</li>"
+    listItems += "<li>" + myLinks[i] + "</li>"
 } 
+
+ulEl.innerHTML = listItems
