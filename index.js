@@ -9,30 +9,32 @@ const linksLocalStorage = JSON.parse(localStorage.getItem("myLinks"))
 
 if (linksLocalStorage) {
     myLinks = linksLocalStorage
-    renderLinks()
+    render(myLinks)
+}
+
+function render(links) {
+    let listItems = " "
+    for (let i =0; i < links.length; i++) {
+       listItems += `
+       <li>
+       <a target='_blank' href='${links[i]}'> ${links[i]}</a>
+       </li>
+       `
+    }  
+    ulEl.innerHTML = listItems
 }
 
 deleteBtn.addEventListener("click", function() {
     localStorage.clear()
     myLinks = []
-    renderLinks()
+    render(myLinks)
 })
 
 inputBtn.addEventListener("click", function() {
     myLinks.push(inputEl.value)
     inputEl.value = ""
     localStorage.setItem("myLinks", JSON.stringify(myLinks))
-    renderLinks()
+    render(myLinks)
 })
 
-function renderLinks() {
-    let listItems = " "
-    for (let i =0; i < myLinks.length; i++) {
-       listItems += `
-       <li>
-       <a target='_blank' href='${myLinks[i]}'> ${myLinks[i]}</a>
-       </li>
-       `
-    }  
-    ulEl.innerHTML = listItems
-}
+
