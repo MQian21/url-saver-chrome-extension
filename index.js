@@ -3,13 +3,20 @@ const inputEl = document.getElementById("input-el")
 const inputBtn = document.getElementById("input-btn")
 const ulEl = document.getElementById("ul-el")
 
-let linksLocalStorage = JSON.parse(localStorage.getItem("myLinks"))
+const deleteBtn = document.getElementById("delete-btn")
+const linksLocalStorage = JSON.parse(localStorage.getItem("myLinks"))
 
 
 if (linksLocalStorage) {
     myLinks = linksLocalStorage
     renderLinks()
 }
+
+deleteBtn.addEventListener("click", function() {
+    localStorage.clear()
+    myLinks = []
+    renderLinks()
+})
 
 inputBtn.addEventListener("click", function() {
     myLinks.push(inputEl.value)
