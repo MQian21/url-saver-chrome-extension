@@ -2,15 +2,15 @@ let myLinks = []
 const inputEl = document.getElementById("input-el")
 const inputBtn = document.getElementById("input-btn")
 const ulEl = document.getElementById("ul-el")
-
 const deleteBtn = document.getElementById("delete-btn")
 const linksLocalStorage = JSON.parse(localStorage.getItem("myLinks"))
-
+const tabBtn = document.getElementById("tab-btn")
 
 if (linksLocalStorage) {
     myLinks = linksLocalStorage
     render(myLinks)
 }
+
 
 function render(links) {
     let listItems = " "
@@ -23,6 +23,15 @@ function render(links) {
     }  
     ulEl.innerHTML = listItems
 }
+
+tabBtn.addEventListener("click", function (){
+    
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+        myLinks.push(tabs[0].url)
+        localStorage.setItem("myLinks", JSON.stringify(myLinks))
+        render(myLinks)
+    })
+})
 
 deleteBtn.addEventListener("click", function() {
     localStorage.clear()
